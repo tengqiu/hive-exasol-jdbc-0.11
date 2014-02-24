@@ -709,6 +709,17 @@ public class HiveDatabaseMetaData implements DatabaseMetaData {
       public boolean next() throws SQLException {
         return false;
       }
+
+	public <T> T getObject(int columnIndex, Class<T> type) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public <T> T getObject(String columnLabel, Class<T> type)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
     };
   }
 
@@ -1106,4 +1117,15 @@ public class HiveDatabaseMetaData implements DatabaseMetaData {
     System.out.println("DriverName: " + meta.getDriverName());
     System.out.println("DriverVersion: " + meta.getDriverVersion());
   }
+
+public ResultSet getPseudoColumns(String catalog, String schemaPattern,
+		String tableNamePattern, String columnNamePattern) throws SQLException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public boolean generatedKeyAlwaysReturned() throws SQLException {
+	// TODO Auto-generated method stub
+	return false;
+}
 }

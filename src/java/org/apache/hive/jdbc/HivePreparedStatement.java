@@ -39,6 +39,7 @@ import java.sql.SQLWarning;
 import java.sql.SQLXML;
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -252,8 +253,6 @@ public class HivePreparedStatement implements PreparedStatement {
     return charIndex;
   }
 
-
-
   /*
    * (non-Javadoc)
    *
@@ -262,7 +261,11 @@ public class HivePreparedStatement implements PreparedStatement {
 
   public ResultSetMetaData getMetaData() throws SQLException {
     // TODO Auto-generated method stub
-    throw new SQLException("Method not supported");
+    if (this.getResultSet() != null) {
+      return this.getResultSet().getMetaData();
+    } else {
+      return executeImmediate(sql).getMetaData();
+    }
   }
 
   /*
@@ -1276,5 +1279,15 @@ public class HivePreparedStatement implements PreparedStatement {
     // TODO Auto-generated method stub
     throw new SQLException("Method not supported");
   }
+
+public void closeOnCompletion() throws SQLException {
+	// TODO Auto-generated method stub
+	
+}
+
+public boolean isCloseOnCompletion() throws SQLException {
+	// TODO Auto-generated method stub
+	return false;
+}
 
 }

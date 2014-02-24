@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.concurrent.Executor;
 
 import javax.security.sasl.SaslException;
 
@@ -116,6 +117,7 @@ public class HiveConnection implements java.sql.Connection {
       // for remote JDBC client, try to set the conf var using 'set foo=bar'
       Statement stmt = createStatement();
       for (Entry<String, String> hiveConf : connParams.getHiveConfs().entrySet()) {
+        if (stmt.isClosed()) stmt = createStatement();
         stmt.execute("set " + hiveConf.getKey() + "=" + hiveConf.getValue());
         stmt.close();
       }
@@ -223,7 +225,7 @@ public class HiveConnection implements java.sql.Connection {
 
   public void commit() throws SQLException {
     // TODO Auto-generated method stub
-    throw new SQLException("Method not supported");
+//    throw new SQLException("Method not supported");
   }
 
   /*
@@ -592,7 +594,7 @@ public class HiveConnection implements java.sql.Connection {
 
   public void rollback() throws SQLException {
     // TODO Auto-generated method stub
-    throw new SQLException("Method not supported");
+//    throw new SQLException("Method not supported");
   }
 
   /*
@@ -603,7 +605,7 @@ public class HiveConnection implements java.sql.Connection {
 
   public void rollback(Savepoint savepoint) throws SQLException {
     // TODO Auto-generated method stub
-    throw new SQLException("Method not supported");
+//    throw new SQLException("Method not supported");
   }
 
   /*
@@ -626,7 +628,7 @@ public class HiveConnection implements java.sql.Connection {
 
   public void setCatalog(String catalog) throws SQLException {
     // TODO Auto-generated method stub
-    throw new SQLException("Method not supported");
+//    throw new SQLException("Method not supported");
   }
 
   /*
@@ -638,7 +640,7 @@ public class HiveConnection implements java.sql.Connection {
   public void setClientInfo(Properties properties)
       throws SQLClientInfoException {
     // TODO Auto-generated method stub
-    throw new SQLClientInfoException("Method not supported", null);
+//    throw new SQLClientInfoException("Method not supported", null);
   }
 
   /*
@@ -650,7 +652,7 @@ public class HiveConnection implements java.sql.Connection {
   public void setClientInfo(String name, String value)
       throws SQLClientInfoException {
     // TODO Auto-generated method stub
-    throw new SQLClientInfoException("Method not supported", null);
+//    throw new SQLClientInfoException("Method not supported", null);
   }
 
   /*
@@ -661,7 +663,7 @@ public class HiveConnection implements java.sql.Connection {
 
   public void setHoldability(int holdability) throws SQLException {
     // TODO Auto-generated method stub
-    throw new SQLException("Method not supported");
+//    throw new SQLException("Method not supported");
   }
 
   /*
@@ -672,7 +674,7 @@ public class HiveConnection implements java.sql.Connection {
 
   public void setReadOnly(boolean readOnly) throws SQLException {
     // TODO Auto-generated method stub
-    throw new SQLException("Method not supported");
+//    throw new SQLException("Method not supported");
   }
 
   /*
@@ -739,5 +741,31 @@ public class HiveConnection implements java.sql.Connection {
     // TODO Auto-generated method stub
     throw new SQLException("Method not supported");
   }
+
+public void setSchema(String schema) throws SQLException {
+	// TODO Auto-generated method stub
+	
+}
+
+public String getSchema() throws SQLException {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+public void abort(Executor executor) throws SQLException {
+	// TODO Auto-generated method stub
+	
+}
+
+public void setNetworkTimeout(Executor executor, int milliseconds)
+		throws SQLException {
+	// TODO Auto-generated method stub
+	
+}
+
+public int getNetworkTimeout() throws SQLException {
+	// TODO Auto-generated method stub
+	return 0;
+}
 
 }

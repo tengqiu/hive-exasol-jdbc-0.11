@@ -18,7 +18,10 @@
 
 package org.apache.hive.jdbc;
 
+import java.math.BigInteger;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.sql.Types;
 
 
@@ -61,6 +64,44 @@ public class JdbcColumn {
 
   public Integer getSqlType() throws SQLException {
     return Utils.hiveTypeToSqlType(type);
+  }
+
+  static String columnClassName(int columnType)
+      throws SQLException {
+    // according to hiveTypeToSqlType possible options are:
+    switch(columnType) {
+      case Types.BOOLEAN:
+        return Boolean.class.getName();
+      case Types.CHAR:
+      case Types.VARCHAR:
+        return String.class.getName();
+      case Types.TINYINT:
+        return Byte.class.getName();
+      case Types.SMALLINT:
+        return Short.class.getName();
+      case Types.INTEGER:
+        return Integer.class.getName();
+      case Types.BIGINT:
+        return Long.class.getName();
+      case Types.DATE:
+        return Date.class.getName();
+      case Types.FLOAT:
+        return Float.class.getName();
+      case Types.DOUBLE:
+        return Double.class.getName();
+      case  Types.TIMESTAMP:
+        return Timestamp.class.getName();
+      case Types.DECIMAL:
+        return BigInteger.class.getName();
+      case Types.BINARY:
+        return byte[].class.getName();
+      case Types.JAVA_OBJECT:
+      case Types.ARRAY:
+      case Types.STRUCT:
+        return String.class.getName();
+      default:
+        throw new SQLException("Invalid column type: " + columnType);
+    }
   }
 
   static int columnDisplaySize(int columnType) throws SQLException {

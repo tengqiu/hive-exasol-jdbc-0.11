@@ -39,11 +39,12 @@ public class HiveResultSetMetaData implements java.sql.ResultSetMetaData {
   }
 
   public String getCatalogName(int column) throws SQLException {
-    throw new SQLException("Method not supported");
+    return "";
   }
 
   public String getColumnClassName(int column) throws SQLException {
-    throw new SQLException("Method not supported");
+    int columnType = getColumnType(column);
+    return JdbcColumn.columnClassName(columnType);
   }
 
   public int getColumnCount() throws SQLException {
@@ -140,11 +141,11 @@ public class HiveResultSetMetaData implements java.sql.ResultSetMetaData {
   }
 
   public String getSchemaName(int column) throws SQLException {
-    throw new SQLException("Method not supported");
+    return "";
   }
 
   public String getTableName(int column) throws SQLException {
-    throw new SQLException("Method not supported");
+    return "";
   }
 
   public boolean isAutoIncrement(int column) throws SQLException {
@@ -153,7 +154,7 @@ public class HiveResultSetMetaData implements java.sql.ResultSetMetaData {
   }
 
   public boolean isCaseSensitive(int column) throws SQLException {
-    throw new SQLException("Method not supported");
+    return false;
   }
 
   public boolean isCurrency(int column) throws SQLException {
@@ -162,7 +163,7 @@ public class HiveResultSetMetaData implements java.sql.ResultSetMetaData {
   }
 
   public boolean isDefinitelyWritable(int column) throws SQLException {
-    throw new SQLException("Method not supported");
+    return false;
   }
 
   public int isNullable(int column) throws SQLException {
@@ -171,27 +172,27 @@ public class HiveResultSetMetaData implements java.sql.ResultSetMetaData {
   }
 
   public boolean isReadOnly(int column) throws SQLException {
-    throw new SQLException("Method not supported");
+    return false;
   }
 
   public boolean isSearchable(int column) throws SQLException {
-    throw new SQLException("Method not supported");
+    return false;
   }
 
   public boolean isSigned(int column) throws SQLException {
-    throw new SQLException("Method not supported");
+    return false;
   }
 
   public boolean isWritable(int column) throws SQLException {
-    throw new SQLException("Method not supported");
+    return false;
   }
 
   public boolean isWrapperFor(Class<?> iface) throws SQLException {
-    throw new SQLException("Method not supported");
+    return false;
   }
 
   public <T> T unwrap(Class<T> iface) throws SQLException {
-    throw new SQLException("Method not supported");
+    return null;
   }
 
 }
