@@ -170,8 +170,13 @@ public class HiveStatement implements java.sql.Statement {
    */
 
   public boolean execute(String sql) throws SQLException {
+
     if (isClosed) {
       throw new SQLException("Can't execute after statement has been closed");
+    }
+
+    if (sql.contains(";")) {
+      sql = sql.replace(";", "");
     }
 
     try {
@@ -190,9 +195,9 @@ public class HiveStatement implements java.sql.Statement {
     if (!stmtHandle.isHasResultSet()) {
       return false;
     }
-    resultSet =  new HiveQueryResultSet.Builder().setClient(client).setSessionHandle(sessHandle)
-        .setStmtHandle(stmtHandle).setMaxRows(maxRows).setFetchSize(fetchSize)
-        .build();
+    resultSet = new HiveQueryResultSet.Builder().setClient(client).setSessionHandle(sessHandle)
+                                                .setStmtHandle(stmtHandle).setMaxRows(maxRows).setFetchSize(fetchSize)
+                                                .build();
     return true;
   }
 

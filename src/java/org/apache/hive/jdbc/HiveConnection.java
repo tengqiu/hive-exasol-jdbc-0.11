@@ -114,8 +114,12 @@ public class HiveConnection implements java.sql.Connection {
         SessionState.get().setHiveVariables(connParams.getHiveVars());
       }
     } else {
-      // for remote JDBC client, try to set the conf var using 'set foo=bar'
       Statement stmt = createStatement();
+      String dbName = connParams.getDbName();
+      stmt.execute("use " + dbName);
+      stmt.close();
+
+      // for remote JDBC client, try to set the conf var using 'set foo=bar'
       for (Entry<String, String> hiveConf : connParams.getHiveConfs().entrySet()) {
         if (stmt.isClosed()) stmt = createStatement();
         stmt.execute("set " + hiveConf.getKey() + "=" + hiveConf.getValue());
