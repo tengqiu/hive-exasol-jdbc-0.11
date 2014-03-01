@@ -76,7 +76,7 @@ public class HivePreparedStatement implements PreparedStatement {
   /**
    * The maximum number of rows this statement should return (0 => all rows).
    */
-  private  int maxRows = 0;
+  private  int maxRows = 1;
 
   /**
    * Add SQLWarnings to the warningChain if needed.
@@ -171,8 +171,15 @@ public class HivePreparedStatement implements PreparedStatement {
    */
 
   protected ResultSet executeImmediate(String sql) throws SQLException {
+
     if (isClosed) {
       throw new SQLException("Can't execute after statement has been closed");
+    }
+
+    if (!sql.contains("limit")) {
+      sql = sql.concat(" limit 1");
+    } else if (sql.contains(";")) {
+      sql = sql.replace(";", "");
     }
 
     try {
@@ -191,9 +198,10 @@ public class HivePreparedStatement implements PreparedStatement {
     } catch (Exception ex) {
       throw new SQLException(ex.toString(), "08S01", ex);
     }
+
     resultSet = new HiveQueryResultSet.Builder().setClient(client).setSessionHandle(sessHandle)
-                      .setStmtHandle(stmtHandle).setMaxRows(maxRows)
-                      .build();
+                                                .setStmtHandle(stmtHandle).setMaxRows(maxRows)
+                                                .build();
     return resultSet;
   }
 
