@@ -130,9 +130,4 @@ public class HiveDataSource implements DataSource {
     throw new SQLException("Method not supported");
   }
 
-public Logger getParentLogger() throws SQLFeatureNotSupportedException {
-	// TODO Auto-generated method stub
-	return null;
-}
-
 }

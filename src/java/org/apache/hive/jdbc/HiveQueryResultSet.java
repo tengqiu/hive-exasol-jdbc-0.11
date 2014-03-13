@@ -274,14 +274,14 @@ public class HiveQueryResultSet extends HiveBaseResultSet {
     return fetchSize;
   }
 
-public <T> T getObject(int columnIndex, Class<T> type) throws SQLException {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-public <T> T getObject(String columnLabel, Class<T> type) throws SQLException {
-	// TODO Auto-generated method stub
-	return null;
-}
+//public <T> T getObject(int columnIndex, Class<T> type) throws SQLException {
+//	// TODO Auto-generated method stub
+//	return (T) getObject(columnIndex);
+//}
+//
+//public <T> T getObject(String columnLabel, Class<T> type) throws SQLException {
+//	// TODO Auto-generated method stub
+//	return (T) getObject(columnLabel);
+//}
 
 }

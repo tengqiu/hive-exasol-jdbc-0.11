@@ -297,8 +297,4 @@ public class HiveDriver implements Driver {
     return manifestAttributes.getValue(attributeName);
   }
 
-public Logger getParentLogger() throws SQLFeatureNotSupportedException {
-	// TODO Auto-generated method stub
-	return null;
-}
 }

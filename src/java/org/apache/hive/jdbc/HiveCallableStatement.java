@@ -2438,25 +2438,4 @@ public class HiveCallableStatement implements java.sql.CallableStatement {
     // TODO Auto-generated method stub
     throw new SQLException("Method not supported");
   }
-
-public void closeOnCompletion() throws SQLException {
-	// TODO Auto-generated method stub
-	
-}
-
-public boolean isCloseOnCompletion() throws SQLException {
-	// TODO Auto-generated method stub
-	return false;
-}
-
-public <T> T getObject(int parameterIndex, Class<T> type) throws SQLException {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-public <T> T getObject(String parameterName, Class<T> type) throws SQLException {
-	// TODO Auto-generated method stub
-	return null;
-}
-
 }

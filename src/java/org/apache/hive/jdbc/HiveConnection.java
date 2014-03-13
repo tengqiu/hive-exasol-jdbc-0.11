@@ -78,10 +78,12 @@ public class HiveConnection implements java.sql.Connection {
   private SQLWarning warningChain = null;
   private TSessionHandle sessHandle = null;
   private final List<TProtocolVersion> supportedProtocols = new LinkedList<TProtocolVersion>();
+  private String url;
   /**
    * TODO: - parse uri (use java.net.URI?).
    */
   public HiveConnection(String uri, Properties info) throws SQLException {
+    this.url = uri;
     Utils.JdbcConnectionParams connParams = Utils.parseURL(uri);
     if (connParams.isEmbeddedMode()) {
       client = new EmbeddedThriftCLIService();
@@ -117,14 +119,12 @@ public class HiveConnection implements java.sql.Connection {
       Statement stmt = createStatement();
       String dbName = connParams.getDbName();
       stmt.execute("use " + dbName);
-      stmt.close();
 
       // for remote JDBC client, try to set the conf var using 'set foo=bar'
       for (Entry<String, String> hiveConf : connParams.getHiveConfs().entrySet()) {
-        if (stmt.isClosed()) stmt = createStatement();
         stmt.execute("set " + hiveConf.getKey() + "=" + hiveConf.getValue());
-        stmt.close();
       }
+      stmt.close();
     }
   }
 
@@ -399,7 +399,7 @@ public class HiveConnection implements java.sql.Connection {
    */
 
   public DatabaseMetaData getMetaData() throws SQLException {
-    return new HiveDatabaseMetaData(client, sessHandle);
+    return new HiveDatabaseMetaData(client, sessHandle, url);
   }
 
   /*
@@ -745,31 +745,5 @@ public class HiveConnection implements java.sql.Connection {
     // TODO Auto-generated method stub
     throw new SQLException("Method not supported");
   }
-
-public void setSchema(String schema) throws SQLException {
-	// TODO Auto-generated method stub
-	
-}
-
-public String getSchema() throws SQLException {
-	// TODO Auto-generated method stub
-	return null;
-}
-
-public void abort(Executor executor) throws SQLException {
-	// TODO Auto-generated method stub
-	
-}
-
-public void setNetworkTimeout(Executor executor, int milliseconds)
-		throws SQLException {
-	// TODO Auto-generated method stub
-	
-}
-
-public int getNetworkTimeout() throws SQLException {
-	// TODO Auto-generated method stub
-	return 0;
-}
 
 }
